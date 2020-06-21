@@ -1,0 +1,14 @@
+<view class="cu-list menu">
+	<view class="cu-item" wx:for="{{list}}" wx:key>
+		<view class="content">
+			<view class=""><text class="text-{{item.Type=='充值'?'green':'red'}}">{{item.Type=='充值'?'充值':'付款'}}</text></view>
+			<view class="text-gray text-sm">
+				{{item.CreatedOn}}</view>
+		</view>
+		<view class="action" style="text-align:right;">
+			<view wx:if="{{item.Money!=0}}" class="text-{{item.Type=='充值'?'green':'red'}}">{{item.Type=='充值'?'+':''}}{{item.Money}} 元</view>
+			<view wx:if="{{item.Num!=0}}" class="text-{{item.Type=='充值'?'green':'red'}}">{{item.Type=='充值'?'+':''}}{{item.Num}} 桶</view>
+		</view>
+	</view>
+	<view wx:if="{{!pageLoadSwitch}}" class="cu-load bg-grey over"></view>
+</view>

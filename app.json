@@ -1,0 +1,40 @@
+{
+  "pages": [
+    "pages/account/index/index",
+    "pages/logs/logs",
+    "pages/workbench/index/index",
+    "pages/workbench/permissionSetting/permissionSetting",
+    "pages/workbench/memberList/memberList",
+    "pages/workbench/bill/bill",
+    "pages/workbench/charge/charge",
+    "pages/workbench/collectionQrcode/collectionQrcode",
+    "pages/account/bill/bill"
+  ],
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/account/index/index",
+        "iconPath": "images/icon_account.png",
+        "selectedIconPath": "images/icon_account_HL.png",
+        "text": "账户"
+      },
+      {
+        "pagePath": "pages/workbench/index/index",
+        "iconPath": "images/icon_workbench.png",
+        "selectedIconPath": "images/icon_workbench_HL.png",
+        "text": "工作台"
+      }
+    ]
+  },
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle": "black"
+  },
+  "sitemapLocation": "sitemap.json",
+  "usingComponents": {
+    "van-button": "@vant/weapp/button/index",
+    "van-dialog": "@vant/weapp/dialog/index"
+  }
+}

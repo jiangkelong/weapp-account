@@ -1,0 +1,51 @@
+<view class="cu-list menu">
+	<view class="cu-item {{modalName=='move-box-'+ index?'move-cur':''}}" wx:for="{{list}}" wx:key bindtouchstart="ListTouchStart" bindtouchmove="ListTouchMove" bindtouchend="ListTouchEnd" data-target="move-box-{{index}}">
+		<view class="content">
+			<view class="">{{item.Name}}</view>
+			<view class="text-gray text-sm">
+				{{item.RoleName}}</view>
+		</view>
+		<view class="action">
+			<view wx:if="{{item.UserId}}" class="text-green">已绑定</view>
+			<view wx:else class="text-red">未绑定</view>
+		</view>
+		<view class="move">
+			<view class="bg-blue" data-item='{{item}}' bindtap="showEditDialog">修改</view>
+			<view class="bg-red" data-index='{{index}}' bindtap="delItem">删除</view>
+			<!-- <view class="bg-grey">解绑</view> -->
+		</view>
+	</view>
+</view>
+<!-- 编辑框 -->
+<van-dialog use-slot title="{{dialogTitle}}" show="{{ showDialogEdit }}" show-cancel-button confirmButtonText="保存" z-index='1' bind:confirm="bindSave">
+	<view class="cus-field">
+		<view class="label">账号</view>
+		<view class="value">
+			<input data-item="LoginName" value="{{ model.LoginName }}" placeholder="请输入登录账号" clearable bindinput="bindInputChange"></input>
+		</view>
+	</view>
+	<view class="cus-field">
+		<view class="label">密码</view>
+		<view class="value">
+			<input data-item="Password" value="{{ model.Password }}" placeholder="请输入登录密码" clearable bindinput="bindInputChange"></input>
+		</view>
+	</view>
+	<view class="cus-field">
+		<view class="label">姓名</view>
+		<view class="value">
+			<input data-item="Name" value="{{ model.Name }}" placeholder="请输入人员姓名" clearable bindinput="bindInputChange"></input>
+		</view>
+	</view>
+	<view class="cus-field">
+		<view class="label">权限</view>
+		<picker bindchange="bindPickerChange" value="{{index}}" range-key="{{'RoleName'}}" range="{{roleList}}">
+			<view class="picker">
+				{{roleList[index].RoleName}}
+			</view>
+		</picker>
+	</view>
+</van-dialog>
+<!-- 悬浮按钮 -->
+<button class="bg-blue cu-btn icon float-btn" bindtap="showAddDialog">
+	<text class="cuIcon-add lg text-white"></text>
+</button>

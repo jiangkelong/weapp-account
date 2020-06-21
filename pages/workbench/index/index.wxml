@@ -1,0 +1,74 @@
+<view class="container">
+	<view wx:if="{{!hasUserInfo && canIUse}}" class="align-center">
+		<view class="usermotto">
+			<text class="user-motto">{{motto}}</text>
+		</view>
+		<van-button type="primary" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 请登录 </van-button>
+	</view>
+	<view wx:else class="align-center bg-gradual-blue padding">
+		<image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+		<text class="userinfo-nickname">{{memberInfo.Name ? memberInfo.Name : userInfo.nickName}}</text>
+		<text wx:if="{{hasUserInfo && memberInfo.IsAdmin}}" class="userinfo-memo">权限:{{memberInfo.RoleName}}</text>
+	</view>
+	<view class="accountInfo">
+		<block wx:if="{{hasUserInfo}}">
+			<view class="align-center" wx:if="{{!memberInfo.IsAdmin}}">
+				<text style="margin:10px 0;font-size:13px;">是工作人员?</text>
+				<van-button type="primary" bindtap="showBindDialog"> 绑定权限 </van-button>
+			</view>
+			<block wx:else>
+				<view class="cu-bar bg-white solid-bottom margin-top">
+					<view class="action">
+						<text class="cuIcon-title text-orange "></text> 操作菜单
+					</view>
+				</view>
+				<view class='nav-list'>
+					<navigator wx:if="{{memberInfo.RoleId==1}}" open-type="navigate" hover-class='none' url="/pages/workbench/permissionSetting/permissionSetting" class="nav-li bg-cyan">
+						<view class="nav-title">权限设置</view>
+						<view class="nav-name">PermissionSetting</view>
+						<text class='cuIcon-settings'></text>
+					</navigator>
+					<navigator wx:if="{{memberInfo.RoleId==1}}" open-type="navigate" hover-class='none' url="/pages/workbench/memberList/memberList" class="nav-li bg-blue">
+						<view class="nav-title">会员列表</view>
+						<view class="nav-name">MemberList</view>
+						<text class='cuIcon-newsfill'></text>
+					</navigator>
+					<navigator wx:if="{{memberInfo.RoleId==1}}" open-type="navigate" hover-class='none' url="/pages/workbench/charge/charge" class="nav-li bg-mauve">
+						<view class="nav-title">充值&收费</view>
+						<view class="nav-name">Recharge&Charging</view>
+						<text class='cuIcon-recharge'></text>
+					</navigator>
+					<navigator open-type="navigate" hover-class='none' url="/pages/workbench/bill/bill" class="nav-li bg-purple">
+						<view class="nav-title">账目流水</view>
+						<view class="nav-name">AccountItems</view>
+						<text class='cuIcon-text'></text>
+					</navigator>
+					<!-- <navigator open-type="navigate" hover-class='none' url="/pages/workbench/permissionSetting/permissionSetting" class="nav-li bg-brown">
+						<view class="nav-title">扣费</view>
+						<view class="nav-name">Charging</view>
+						<text class='cuIcon-sponsorfill'></text>
+					</navigator> -->
+					<navigator open-type="navigate" hover-class='none' url="/pages/workbench/collectionQrcode/collectionQrcode" class="nav-li bg-green">
+						<view class="nav-title">收款码</view>
+						<view class="nav-name">CollectionQrcode</view>
+						<text class='cuIcon-qr_code'></text>
+					</navigator>
+				</view>
+			</block>
+		</block>
+	</view>
+	<van-dialog use-slot title="绑定内部账号" show="{{ showDialog }}" show-cancel-button z-index='1' bind:confirm="bindAdmin">
+	<view class="cus-field">
+			<view class="label">账号</view>
+			<view class="value">
+				<input data-item="LoginName" value="{{ admin.LoginName }}" placeholder="请输入账号" clearable bindinput="bindInputChange"></input>
+			</view>
+		</view>
+		<view class="cus-field">
+			<view class="label">密码</view>
+			<view class="value">
+				<input type="password" data-item="Password" value="{{ admin.Password }}" placeholder="请输入密码" clearable bindinput="bindInputChange"></input>
+			</view>
+		</view>
+	</van-dialog>
+</view>

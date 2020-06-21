@@ -1,0 +1,52 @@
+<view class="cu-bar bg-cyan search fix-top">
+	<view class="search-form radius">
+		<text class="cuIcon-search"></text>
+		<input type="text" value="{{pageParm.QueryWords}}" placeholder="搜索会员编号、名称" clearable confirm-type="search" bindinput="bindInputSearchChange" bindconfirm="bindSearch"></input>
+	</view>
+</view>
+<view class="cu-list menu" style="margin-top:50px;">
+	<view class="cu-item {{modalName=='move-box-'+ index?'move-cur':''}}" wx:for="{{list}}" wx:key bindtouchstart="ListTouchStart" bindtouchmove="ListTouchMove" bindtouchend="ListTouchEnd" data-target="move-box-{{index}}">
+		<view class="content">
+			<view class="">{{item.MemberNo}}</view>
+			<view class="text-gray text-sm">
+				<text class="text-margin">{{item.MemberName}}</text><text class="text-margin">{{item.Tel}}</text></view>
+			<view class="text-gray text-sm">
+				<text class="text-margin">{{item.Balance_Money}}元</text><text class="text-margin">{{item.Balance_Num}}桶</text></view>
+		</view>
+		<!-- <view class="action">
+			<view wx:if="{{item.UserId}}" class="text-green">已绑定</view>
+			<view wx:else class="text-red">未绑定</view>
+		</view> -->
+		<view class="move">
+			<view class="bg-blue" data-item='{{item}}' bindtap="showEditDialog">修改</view>
+			<view class="bg-red" data-id='{{item.MemberId}}' data-index='{{index}}' bindtap="delItem">删除</view>
+			<view class="bg-green" data-id='{{item.MemberId}}' bindtap="resetPassword" style="padding:0 7px; text-align:center;"> 重置密码 </view>
+		</view>
+	</view>
+	<view wx:if="{{!pageLoadSwitch}}" class="cu-load bg-grey over"></view>
+</view>
+<!-- 编辑框 -->
+<van-dialog use-slot title="{{dialogTitle}}" show="{{ showDialogEdit }}" show-cancel-button confirmButtonText="保存" z-index='1' bind:confirm="bindSave">
+	<view class="cus-field">
+		<view class="label">会员编号</view>
+		<view class="value">
+			<input data-item="MemberNo" value="{{ model.MemberNo }}" placeholder="请输入会员编号" clearable bindinput="bindInputChange"></input>
+		</view>
+	</view>
+	<view class="cus-field">
+		<view class="label">会员名称</view>
+		<view class="value">
+			<input data-item="MemberName" value="{{ model.MemberName }}" placeholder="请输入会员名称" clearable bindinput="bindInputChange"></input>
+		</view>
+	</view>
+	<view class="cus-field">
+		<view class="label">联系方式</view>
+		<view class="value">
+			<input data-item="Tel" value="{{ model.Tel }}" placeholder="请输入联系方式" clearable bindinput="bindInputChange"></input>
+		</view>
+	</view>
+</van-dialog>
+<!-- 悬浮按钮 -->
+<button class="bg-blue cu-btn icon float-btn" bindtap="showAddDialog">
+	<text class="cuIcon-add lg text-white"></text>
+</button>

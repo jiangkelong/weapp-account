@@ -1,0 +1,77 @@
+<!--index.wxml-->
+<view class="container">
+	<view wx:if="{{!hasUserInfo && canIUse}}" class="align-center">
+		<view class="usermotto">
+			<text class="user-motto">{{motto}}</text>
+		</view>
+		<van-button type="primary" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 登录查询余额 </van-button>
+	</view>
+	<view wx:else class="align-center bg-gradual-green padding">
+		<image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+		<text class="userinfo-nickname">{{account.MemberName ? account.MemberName : userInfo.nickName}}</text>
+		<text wx:if="{{hasUserInfo && memberInfo.IsMember}}" class="userinfo-memo">会员编号:{{account.MemberNo}}</text>
+	</view>
+	<view class="accountInfo">
+		<block wx:if="{{hasUserInfo}}">
+			<view class="align-center" wx:if="{{!memberInfo.IsMember}}">
+				<van-button type="primary" bindtap="showBindCardDialog"> 绑定会员卡 </van-button>
+			</view>
+			<block wx:else>
+				<view class="cu-bar bg-white solid-bottom margin-top">
+					<view class="action">
+						<text class="cuIcon-title text-orange "></text> 账户余额
+					</view>
+					<view class="action">
+						<text class="cuIcon-refresh" bindtap="getBalance"></text>
+					</view>
+				</view>
+				<view class="padding flex text-center text-grey bg-white">
+					<view class="flex flex-sub flex-direction solid-right">
+						<view class="text-xxl text-orange">{{account.Balance_Money}}</view>
+						<view class="margin-top-sm">元</view>
+					</view>
+					<view class="flex flex-sub flex-direction">
+						<view class="text-xxl text-green">{{account.Balance_Num}}</view>
+						<view class="margin-top-sm">桶</view>
+					</view>
+				</view>
+				<view class='nav-list'>
+					<navigator open-type="navigate" hover-class='none' url="/pages/account/bill/bill" class="nav-li bg-orange">
+						<view class="nav-title">账单</view>
+						<view class="nav-name">Bill</view>
+						<text class='cuIcon-text'></text>
+					</navigator>
+					<view class="nav-li bg-green" bindtap="showChangePasswordDialog">
+						<view class="nav-title">修改密码</view>
+						<view class="nav-name">ChangePassword</view>
+						<text class='cuIcon-settings'></text>
+					</view>
+				</view>
+			</block>
+		</block>
+	</view>
+
+	<van-dialog use-slot title="绑定会员卡" show="{{ showDialog }}" show-cancel-button z-index='1' bind:confirm="bindCard">
+		<view class="cus-field">
+			<view class="label">会员编号</view>
+			<view class="value">
+				<input data-item="MemberNo" value="{{ member.MemberNo }}" placeholder="请输入会员编号" clearable bindinput="bindInputChange"></input>
+			</view>
+		</view>
+		<view class="cus-field">
+			<view class="label">会员密码</view>
+			<view class="value">
+				<input type="password" data-item="Password" value="{{ member.Password }}" placeholder="请输入会员密码" clearable bindinput="bindInputChange"></input>
+			</view>
+		</view>
+	</van-dialog>
+	<!-- 修改密码 -->
+	<van-dialog use-slot title="修改密码" show="{{ showDialogChangePassword }}" show-cancel-button confirmButtonText="提交" z-index='1' bind:confirm="bindSaveChangePassword">
+		<view class="cus-field">
+			<view class="label">新密码</view>
+			<view class="value">
+				<input type="password" value="{{ newPassword }}" placeholder="请输入新密码" clearable bindinput="bindInputChangePassword"></input>
+			</view>
+		</view>
+	</van-dialog>
+</view>

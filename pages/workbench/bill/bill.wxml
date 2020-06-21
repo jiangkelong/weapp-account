@@ -1,0 +1,74 @@
+<view class="cu-list menu">
+	<view class="cu-item" wx:for="{{list}}" wx:key>
+		<view class="content">
+			<view class=""><text class="text-{{item.Type=='充值'?'green':'red'}}">{{item.Type}}</text>-{{item.MakeMan}}</view>
+			<view class="text-gray text-sm">
+				{{item.MemberName}}</view>
+			<view class="text-gray text-sm">
+				{{item.CreatedOn}}</view>
+		</view>
+		<view class="action" style="text-align:right;">
+			<view wx:if="{{item.Money!=0}}" class="text-{{item.Type=='充值'?'green':'red'}}">{{item.Type=='充值'?'+':''}}{{item.Money}} 元</view>
+			<view wx:if="{{item.Num!=0}}" class="text-{{item.Type=='充值'?'green':'red'}}">{{item.Type=='充值'?'+':''}}{{item.Num}} 桶</view>
+		</view>
+	</view>
+	<view wx:if="{{!pageLoadSwitch}}" class="cu-load bg-grey over"></view>
+</view>
+<!-- 查询框 -->
+<van-dialog use-slot title="查询" show="{{ showDialog }}" show-cancel-button confirmButtonText="查询" z-index='1' bind:confirm="bindSearch">
+	<view class="cus-field">
+		<view class="label">会员编号</view>
+		<view class="value">
+			<input data-item="MemberNo" value="{{ pageParm.MemberNo }}" placeholder="请输入会员编号" clearable bindinput="bindInputChange"></input>
+		</view>
+	</view>
+	<view class="cus-field">
+		<view class="label">会员名称</view>
+		<view class="value">
+			<input data-item="MemberName" value="{{ pageParm.MemberName }}" placeholder="请输入会员名称" clearable bindinput="bindInputChange"></input>
+		</view>
+	</view>
+	<view class="cus-field">
+		<view class="label">操作人</view>
+		<view class="value">
+			<input data-item="MakeMan" value="{{ pageParm.MakeMan }}" placeholder="请输入操作人" clearable bindinput="bindInputChange"></input>
+		</view>
+	</view>
+	<view class="cus-field">
+		<view class="label">类型</view>
+		<picker bindchange="bindPickerChange" value="{{index}}" range="{{types}}">
+			<view class="picker">
+				{{types[index]}}
+			</view>
+		</picker>
+	</view>
+	<view class="cus-field">
+		<view class="label">操作日期</view>
+		<picker mode="date" value="{{pageParm.BeginDate}}" start="2020-06-01" bindchange="BeginDateChange">
+			<view class="picker">
+				{{pageParm.BeginDate}}
+			</view>
+		</picker>
+	</view>
+	<view class="cus-field">
+		<view class="label">至</view>
+		<picker mode="date" value="{{pageParm.EndDate}}" start="2020-06-01" bindchange="EndDateChange">
+			<view class="picker">
+				{{pageParm.EndDate}}
+			</view>
+		</picker>
+	</view>
+</van-dialog>
+<!-- 悬浮按钮 -->
+<view class="float-btn">
+	<view>
+		<button class="bg-blue cu-btn icon" bindtap="showQueryDialog">
+			<text class="cuIcon-search lg text-white"></text>
+		</button>
+	</view>
+	<!-- <view style="margin-top:5px;">
+		<button class="bg-green cu-btn icon" bindtap="showQueryDialog">
+			<text class="cuIcon-refresharrow lg text-white"></text>
+		</button>
+	</view> -->
+</view>

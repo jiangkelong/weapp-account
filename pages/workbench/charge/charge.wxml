@@ -1,0 +1,37 @@
+<view class="cu-bar bg-cyan search fix-top">
+	<view class="search-form radius">
+		<text class="cuIcon-search"></text>
+		<input type="text" value="{{pageParm.QueryWords}}" placeholder="搜索会员编号、名称" clearable confirm-type="search" bindinput="bindInputSearchChange" bindconfirm="bindSearch"></input>
+	</view>
+</view>
+<view class="cu-list menu" style="margin-top:50px;">
+	<view class="cu-item {{modalName=='move-box-'+ index?'move-cur':''}}" wx:for="{{list}}" wx:key bindtouchstart="ListTouchStart" bindtouchmove="ListTouchMove" bindtouchend="ListTouchEnd" data-target="move-box-{{index}}">
+		<view class="content">
+			<view class="">{{item.MemberNo}}</view>
+			<view class="text-gray text-sm">
+				<text class="text-margin">{{item.MemberName}}</text><text class="text-margin">{{item.Tel}}</text></view>
+			<view class="text-gray text-sm">
+				<text class="text-margin">{{item.Balance_Money}}元</text><text class="text-margin">{{item.Balance_Num}}桶</text></view>
+		</view>
+		<view class="move">
+			<view class="bg-green" data-index='{{index}}' data-id='{{item.MemberId}}' data-type='recharge' bindtap="showChargeDialog">充值</view>
+			<view class="bg-orange" data-index='{{index}}' data-id='{{item.MemberId}}' data-type='charging' bindtap="showChargeDialog">收款</view>
+		</view>
+	</view>
+	<view wx:if="{{!pageLoadSwitch}}" class="cu-load bg-grey over"></view>
+</view>
+<!-- 充值/收款框 -->
+<van-dialog use-slot title="{{dialogChargeTitle}}" show="{{ showDialogCharge }}" show-cancel-button confirmButtonText="提交" z-index='1' bind:confirm="bindChargeSave">
+	<view class="cus-field">
+		<view class="label">金额(元)</view>
+		<view class="value">
+			<input type="digit" data-item="Money" value="{{ charge.Money }}" placeholder="请输入数值" clearable bindinput="bindInputChangeCharge"></input>
+		</view>
+	</view>
+	<view class="cus-field">
+		<view class="label">数量(桶)</view>
+		<view class="value">
+			<input type="digit" data-item="Num" value="{{ charge.Num }}" placeholder="请输入数值" clearable bindinput="bindInputChangeCharge"></input>
+		</view>
+	</view>
+</van-dialog>
