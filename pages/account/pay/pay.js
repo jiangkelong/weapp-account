@@ -7,7 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    pay:{MakeManId:null,Money:null,Num:null},
+    pay:{MakeManId:null,Money:null,Num:null,Password:null},
     show:false
   },
 
@@ -60,6 +60,14 @@ Page({
     })
   },
   paySubmit:function(){
+    if(this.data.pay.Password == null || this.data.pay.Password.trim()==""){
+      wx.showToast({
+        title: '请正确输入密码',
+        icon: 'none',
+        duration: 1500
+      })
+      return;
+    }
     const money = parseFloat(this.data.pay.Money)
     const num = parseFloat(this.data.pay.Num)
     if (money < 0 || num < 0 || (isNaN(money) && isNaN(num)) || (money == 0 && isNaN(num)) || (num == 0 && isNaN(money))) {

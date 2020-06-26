@@ -12,6 +12,12 @@
 			<input type="digit" data-item="Money" value="{{ pay.Money }}" placeholder="请输入付款金额" clearable bindinput="bindInputChange"></input>
 		</view>
 	</view>
+	<view class="cus-field">
+		<view class="label">密码</view>
+		<view class="value">
+			<input type="password" data-item="Password" value="{{ pay.Password }}" placeholder="请输入密码" clearable bindinput="bindInputChange"></input>
+		</view>
+	</view>
   <view class="cu-bar btn-group" style="margin-top:20px;">
     <button class="cu-btn bg-green shadow-blur round lg" bindtap="paySubmit">支 付</button>
   </view>
