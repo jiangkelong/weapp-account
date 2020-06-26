@@ -72,11 +72,16 @@ class HTTP {
     else {
       msg = tips[err_code] || tips[1];
     }
-    wx.showToast({
-      title: msg,
-      icon: 'none',
-      duration: 2000
+    wx.showModal({
+      title: '提示',
+      content: msg,
+      showCancel:false
     })
+    // wx.showToast({
+    //   title: msg,
+    //   icon: 'none',
+    //   duration: 2000
+    // })
   }
 }
 

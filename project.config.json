@@ -18,15 +18,19 @@
 		"checkInvalidKey": true,
 		"checkSiteMap": true,
 		"uploadWithSourceMap": true,
+		"compileHotReLoad": false,
 		"babelSetting": {
 			"ignore": [],
 			"disablePlugins": [],
 			"outputPath": ""
-		}
+		},
+		"useIsolateContext": true,
+		"useCompilerModule": false,
+		"userConfirmedUseCompilerModuleSwitch": false
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.10.4",
-	"appid": "wx06b84905eefced45",
+	"appid": "wx9ef7ba0e102dfd86",
 	"projectname": "WeApp",
 	"debugOptions": {
 		"hidedInDevtools": []
@@ -60,10 +64,17 @@
 			"list": [
 				{
 					"id": 0,
+					"name": "pages/account/pay/pay",
+					"pathName": "pages/account/pay/pay",
+					"query": "scene=5",
+					"scene": 1011
+				},
+				{
+					"id": -1,
 					"name": "pages/workbench/collectionQrcode/collectionQrcode",
 					"pathName": "pages/workbench/collectionQrcode/collectionQrcode",
-					"query": "scene=xxxx",
-					"scene": 1011
+					"query": "",
+					"scene": null
 				}
 			]
 		}

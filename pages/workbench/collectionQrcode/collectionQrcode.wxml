@@ -1,14 +1,14 @@
-<view class="cu-card case {{isCard?'no-card':''}}">
+<view class="cu-card case">
   <view class="cu-item shadow">
     <view class="image">
-      <image src="../../../images/qrcode.jpg" mode="widthFix"></image>
+      <image src="{{qrcode_url}}" mode="widthFix"></image>
     </view>
-    <view class="cu-list menu">
+    <!-- <view class="cu-list menu">
       <view class="cu-item">
         <view class="content flex-sub">
           <view class="text-grey">演示用</view>
         </view>
       </view>
-    </view>
+    </view> -->
   </view>
 </view>

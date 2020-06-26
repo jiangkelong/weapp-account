@@ -16,8 +16,9 @@ Page({
   },
   onShow: function () {
     //页面显示时重新获取账户余额
-    if(this.data.memberInfo.IsMember && wx.getStorageSync('userId'))
+    if(wx.getStorageSync('userId')){
       this.getBalance();
+    }
   },
   onLoad: function () {
     if (app.globalData.memberInfo) {
@@ -35,7 +36,9 @@ Page({
       }, error => {
         // failure
       });
-      this.getBalance()
+      if(wx.getStorageSync('userId')){
+        this.getBalance();
+      }
   }
     if (app.globalData.userInfo) {
       this.setData({

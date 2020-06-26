@@ -120,5 +120,19 @@ class api extends HTTP{
       method: 'post'
     })
   }
+  //客户付款
+  paySubmit(parm){
+    return this.request({
+      url:'Weapp/PaySubmit',
+      data:parm,
+      method: 'post'
+    })
+  }
+
+  getQrcode(parm){
+    return this.request({
+      url:'Weapp/CreateQRCode'
+    })
+  }
 }
 export {api}

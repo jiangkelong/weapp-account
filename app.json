@@ -1,14 +1,14 @@
 {
   "pages": [
     "pages/account/index/index",
-    "pages/logs/logs",
     "pages/workbench/index/index",
     "pages/workbench/permissionSetting/permissionSetting",
     "pages/workbench/memberList/memberList",
     "pages/workbench/bill/bill",
     "pages/workbench/charge/charge",
     "pages/workbench/collectionQrcode/collectionQrcode",
-    "pages/account/bill/bill"
+    "pages/account/bill/bill",
+    "pages/account/pay/pay"
   ],
   "tabBar": {
     "list": [

@@ -68,7 +68,7 @@ Page({
         ['pageParm.CurrentPage']:1
       })
     }
-    app.api.getMemberPageList(this.data.pageParm,this.data.queryWords)
+    app.api.getMemberPageList(this.data.pageParm)
       .then(r => {
         //console.log(r.Items.length)
         var tempList=this.data.list
