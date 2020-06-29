@@ -106,6 +106,10 @@ Page({
           ['memberInfo.RoleId']:r.RoleId,
           ['memberInfo.RoleName']:r.RoleName,
         })
+        wx.setStorage({
+          key: "userId",
+          data: r.UserId
+        })
         wx.showToast({
           title: '绑定成功',
           duration:2000
